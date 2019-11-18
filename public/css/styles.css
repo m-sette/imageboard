@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+#main {
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card {
+    /* min-height: 100vh; */
+    /* grid-template-rows: 1fr 1fr 1fr; */
+    border: 1px solid black;
+}
+
+img {
+    height: 300px;
+    width: 300px;
+}

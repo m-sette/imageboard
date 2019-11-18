@@ -1,10 +1,31 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>Image Board</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+    <h1>This is my image board Project</h1>
+    <div id="main">
+        <!-- <h2>maths 2*2 = {{2 * 2 }}</h2>
+        <h2 v-if="seen">can you see me?</h2>
+        <h2 v-else>I am the else</h2> -->
+        <!-- <ul>
+            <li v-for="image in images">
+
+                {{image.title}}
+                <img :src="image.url" :alt="images.url">
+            </li>
+        </ul> -->
+
+        <div class="card" v-for="image in images">
+            <img :src="image.url" :alt="images.title"><br>
+            {{image.title}}
+        </div>
+
+    </div>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js" charset="utf-8"></script>
 </body>
 </html>
