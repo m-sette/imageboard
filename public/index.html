@@ -1,26 +1,26 @@
 <!doctype html>
-<html>
+<html lang="en" dir="ltr">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Image Board</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>This is my image board Project</h1>
+    <header>
+        <h1>This is my image board Project</h1>
+    </header>
+
     <div id="main">
-        <!-- <h2>maths 2*2 = {{2 * 2 }}</h2>
-        <h2 v-if="seen">can you see me?</h2>
-        <h2 v-else>I am the else</h2> -->
-        <!-- <ul>
-            <li v-for="image in images">
+        <nav>
+            <h2>Latest images</h2>
+        </nav>
+        <div class="container">
+            <div class="card" v-for="image in images">
+                <img :src="image.url" :alt="images.title">
+                <p>{{image.title}}</p>
+            </div>
 
-                {{image.title}}
-                <img :src="image.url" :alt="images.url">
-            </li>
-        </ul> -->
-
-        <div class="card" v-for="image in images">
-            <img :src="image.url" :alt="images.title"><br>
-            {{image.title}}
         </div>
 
     </div>

@@ -3,7 +3,6 @@ new Vue({
     data: {
         name: "habanero!",
         seen: false,
-        //array: [],
         images: []
     },
     mounted: function() {
@@ -11,16 +10,15 @@ new Vue({
         //console.log("This is my images in the function: ", this.images);
         var me = this;
         axios.get("/images").then(function(res) {
-            //console.log("resposne from images ", res.data);
-            //console.log("tis ", me.images);
+            console.log("resposne from images ", res.data);
             me.images = res.data;
+            console.log(me.images);
         });
-    },
-    methods: {
-        myFunction: function(name) {
-            console.log("function is running");
-            console.log("name: ", name);
-            this.name = name;
-        }
     }
+    // methods: {
+    //     sortedImages: function(a) {
+    //         console.log("date a: ", a);
+    //         //this.name = name;
+    //     }
+    // }
 });

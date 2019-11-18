@@ -3,19 +3,38 @@
     margin: 0;
 }
 
+header {
+    height: 100px;
+}
+
 #main {
-    border: 1px solid black;
+}
+
+.container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-rows: repeat(4, 1fr); */
+    justify-content: space-around;
 }
 
 .card {
-    /* min-height: 100vh; */
-    /* grid-template-rows: 1fr 1fr 1fr; */
     border: 1px solid black;
+    border-radius: 15px;
+    justify-self: center;
+    align-self: center;
+    margin: 10px;
+    padding: 10px;
 }
 
 img {
     height: 300px;
-    width: 300px;
+    width: 350px;
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 12fr;
+    }
 }
