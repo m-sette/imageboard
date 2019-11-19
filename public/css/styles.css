@@ -12,12 +12,8 @@ header {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* grid-template-rows: repeat(4, 1fr); */
-    /* justify-items: center;
-    align-items: center; */
-    /* place-items: center / center; */
-    justify-content: space-around;
+    grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+    grid-gap: 1rem;
 }
 
 .card {
@@ -38,6 +34,5 @@ img {
     .container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 12fr;
     }
 }

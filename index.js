@@ -2,6 +2,9 @@ const express = require("express");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const path = require("path");
+const s3 = require("./s3");
+const { s3Url } = require("./config.json");
+
 const app = express();
 
 const diskStorage = multer.diskStorage({
@@ -24,19 +27,24 @@ const uploader = multer({
 const db = require("./utils/db");
 
 app.use(express.static("./public"));
-app.post("/upload", uploader.single("file"), (req, res) => {
-    console.log("this is the upload route");
-    console.log("Input ......", req.body);
-    console.log("req.file....", req.file);
-    if (req.file) {
-        res.json({ success: true });
-    } else {
-        res.json({ success: false });
-    }
+
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    const { title, description, username } = req.body;
+    const imageUrl = `${s3Url}${req.file.filename}`;
+    db.addImage(imageUrl, username, title, description)
+        .then(({ rows }) => {
+            //console.log(rows[0]);
+            res.json({
+                image: rows[0]
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 app.get("/images", (req, res) => {
-    db.getImages()
+    db.getImages(12)
         .then(result => {
             //let images = result.rows;
             res.json(result.rows);
