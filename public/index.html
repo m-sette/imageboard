@@ -62,6 +62,13 @@
                 <button @click.prevent.default="commentClick">Submit</button>
             </form>
 
+            <div class="comments-section">
+                <div class="comment-box" v-for="comment in comments">
+                    <h3>{{comment}}</h3>
+                    <p>By {{commentname}}</p>
+                </div>
+
+            </div>
 
 
         </div>

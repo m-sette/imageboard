@@ -30,3 +30,12 @@ module.exports.getImageId = function(id) {
         [id]
     );
 };
+
+module.exports.addComment = function(username, comment, id) {
+    return db.query(
+        `INSERT INTO comments (username, comment_text, image_id)
+        VALUES ($1, $2, $3) RETURNING *
+        `,
+        [username, comment, id]
+    );
+};

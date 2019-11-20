@@ -44,7 +44,17 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 });
 
 app.post("/upload-comment", (req, res) => {
-    console.log(req.body);
+    const { username, comment, id } = req.body;
+    db.addComment(username, comment, id)
+        .then(({ rows }) => {
+            res.json({
+                image: rows[0]
+            });
+            console.log(rows);
+        })
+        .catch(err => {
+            console.log("error on the post up load comment req: ", err);
+        });
 });
 
 app.get("/images", (req, res) => {

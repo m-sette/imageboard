@@ -2,14 +2,14 @@ Vue.component("image-modal", {
     template: "#image-template",
     data: function() {
         return {
-            images: [],
+            comments: [],
             url: "",
             title: "",
             description: "",
             username: "",
-            created: "",
             comment: "",
-            commentname: ""
+            commentname: "",
+            created: ""
         };
     },
     props: ["id"],
@@ -30,19 +30,20 @@ Vue.component("image-modal", {
             this.$emit("close");
         },
         commentClick: function() {
-            // this.comment;
-            // this.username;
-            //console.log(this.comment, this.commentname, this.id);
+            var me = this;
+            var myObj = {
+                comment: this.comment,
+                username: this.commentname,
+                id: this.id
+            };
+
+            console.log(myObj);
             axios
-                .post(
-                    "/upload-comment",
-                    this.comment,
-                    this.commentname,
-                    this.id
-                )
+                .post("/upload-comment", myObj)
                 .then(function(res) {
-                    //console.log("res POST from upload", res);
-                    //me.images.unshift(res.data.image);
+                    console.log("res.data.image...", res.data.image);
+                    me.commentname = res.data.image.username;
+                    me.comment = res.data.image.comment_text;
                 })
                 .catch(function(err) {
                     console.log("Error in the post upload", err);
