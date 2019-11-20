@@ -6,6 +6,7 @@ const s3 = require("./s3");
 const { s3Url } = require("./config.json");
 
 const app = express();
+app.use(express.json());
 
 const diskStorage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -33,7 +34,6 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     const imageUrl = `${s3Url}${req.file.filename}`;
     db.addImage(imageUrl, username, title, description)
         .then(({ rows }) => {
-            //console.log(rows[0]);
             res.json({
                 image: rows[0]
             });
@@ -41,6 +41,10 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         .catch(err => {
             console.log(err);
         });
+});
+
+app.post("/upload-comment", (req, res) => {
+    console.log(req.body);
 });
 
 app.get("/images", (req, res) => {
@@ -53,5 +57,19 @@ app.get("/images", (req, res) => {
             console.log("error on the image rout: ", err);
         });
 });
+
+app.get("/current-image/:id", (req, res) => {
+    const { id } = req.params;
+    db.getImageId(id)
+        .then(result => {
+            //console.log(result.rows);
+            res.json(result.rows);
+        })
+        .catch(err => {
+            console.log("get image by ID ", err);
+        });
+});
+
+// Get a scond rout to get the comments.
 
 app.listen(8080, () => console.log("image board on port 8080"));

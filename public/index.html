@@ -16,6 +16,14 @@
     <div id="main">
         <nav>
             <h2>Fill the form and add more images</h2>
+
+            <image-modal
+            v-if="currentImage"
+            v-bind:id="currentImage"
+            v-on:close="unsetCurrentImage"
+            ></image-modal>
+
+
             <form id="input-field" >
                 <fieldset>
                     <legend>upload image field</legend>
@@ -31,14 +39,38 @@
             </form>
         </nav>
         <div class="container">
-            <div class="card" v-for="image in images" v-bind:key="image.url">
+            <div class="card" v-for="image in images" v-bind:key="image.url" @click="setCurrentImage(image.id)">
                 <img :src="image.url" :alt="images.title">
                 <p>{{image.title}}</p>
             </div>
         </div>
     </div>
 
+<p></p>
+    <!-- components goes here. outide of the vue instatnces -->
+    <script type="text/x-template" id="image-template">
+        <div class="pop-up">
+            <p @click="unsetCurrentImage">X</p>
+            <img :src="url" alt="">
+            <h2>{{title}}</h2>
+            <h4>{{description}}</h4>
+            <p>uploaded by {{username}} on {{created}}</p>
+
+            <form id="comment-field">
+                <input v-model= "comment" type="text" name="comment" placeholder="comment">
+                <input v-model= "commentname" type="text" name="commentname" placeholder="username">
+                <button @click.prevent.default="commentClick">Submit</button>
+            </form>
+
+
+
+        </div>
+    </script>
+
+
+
     <script src="/js/axios.min.js"></script>
+    <script src="/js/components.js" charset="utf-8"></script>
     <script src="/js/script.js" charset="utf-8"></script>
 </body>
 </html>

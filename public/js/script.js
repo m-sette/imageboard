@@ -5,7 +5,8 @@ new Vue({
         title: "",
         description: "",
         username: "",
-        file: null
+        file: null,
+        currentImage: null
     },
     mounted: function() {
         var me = this;
@@ -33,6 +34,18 @@ new Vue({
         },
         handleChanges: function(e) {
             this.file = e.target.files[0];
+        },
+        setCurrentImage: function(e) {
+            this.currentImage = e;
+        },
+        unsetCurrentImage: function() {
+            this.currentImage = null;
         }
     }
 });
+
+//axios.post("/comment", {
+// id: this.id,
+// username: this.username,
+// commet: this.commet
+// })
