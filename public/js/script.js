@@ -15,14 +15,10 @@ new Vue({
             .get("/images")
             .then(function(res) {
                 me.images = res.data;
-                //console.log(me.images);
-                //me.lastId = me.images.slice(-1)[0].id;
-                //console.log(me.lastId);
             })
             .catch(err => {
                 console.log("Error on the GET images Route: ", err);
             });
-
         //addEventListener("hashchange", function() {
         //something
         //do some check
@@ -74,27 +70,25 @@ new Vue({
         }
     }
 });
-// function checkScrollPos() {
-//     setTimeout(function() {
-//         if (
-//             $(document).scrollTop() + $(window).height() ===
-//             $(document).height()
-//         ) {
-//             $.ajax({
-//                 url: nextUrl,
-//                 method: "GET",
-//                 data: {
-//                     query: userInput,
-//                     type: artistOrAlbum
-//                 },
-//                 success: function(response) {
-//                     response = response.artists || response.albums;
-//                     request(response);
-//                     checkScrollPos();
-//                 }
+// checkScrollPos: function() {
+//     var me = this;
+//     me.lastid = me.images.slice(-1)[0].id;
+//     var bottomOfWindow =
+//         document.documentElement.scrollTop + window.innerHeight ===
+//         document.documentElement.offsetHeight;
+//     console.log(bottomOfWindow);
+//     if (bottomOfWindow) {
+//         axios
+//             .get("/images/" + me.lastid)
+//             .then(function(res) {
+//                 console.log("This is the more data ", res.data);
+//                 //me.images.push(data);
+//                 me.images = me.images.concat(res.data);
+//             })
+//             .catch(function(err) {
+//                 console.log("Error on more buttom", err);
 //             });
-//         } else {
-//             checkScrollPos();
-//         }
-//     }, 500);
+//     }
 // }
+// $(document).scrollTop() + $(window).height() ===
+// $(document).height()

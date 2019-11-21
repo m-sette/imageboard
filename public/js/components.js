@@ -15,7 +15,6 @@ Vue.component("image-modal", {
     props: ["id"],
     mounted: function() {
         var me = this;
-
         axios.get("/current-image/" + this.id).then(function({ data }) {
             me.this = data;
             me.url = data.image.url;
@@ -24,6 +23,14 @@ Vue.component("image-modal", {
             me.username = data.image.username;
             me.created = data.image.created_at;
             me.comments = data.comments;
+        });
+
+        var boxModal = document.querySelector(".pop-up");
+
+        document.addEventListener("open", function(e) {
+            console.log(e.pageY);
+
+            boxModal.style.top = e.pageY + "px";
         });
     },
     methods: {
