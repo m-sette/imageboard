@@ -43,14 +43,14 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         });
 });
 
-app.post("/upload-comment", (req, res) => {
+app.post("/comment", (req, res) => {
     const { username, comment, id } = req.body;
     db.addComment(username, comment, id)
         .then(({ rows }) => {
             res.json({
                 image: rows[0]
             });
-            console.log(rows);
+            //console.log(rows);
         })
         .catch(err => {
             console.log("error on the post up load comment req: ", err);
@@ -58,9 +58,8 @@ app.post("/upload-comment", (req, res) => {
 });
 
 app.get("/images", (req, res) => {
-    db.getImages(12)
+    db.getImages(6)
         .then(result => {
-            //let images = result.rows;
             res.json(result.rows);
         })
         .catch(err => {
@@ -70,16 +69,23 @@ app.get("/images", (req, res) => {
 
 app.get("/current-image/:id", (req, res) => {
     const { id } = req.params;
+    console.log(id);
     db.getImageId(id)
         .then(result => {
-            //console.log(result.rows);
-            res.json(result.rows);
+            db.getComments(id)
+                .then(data => {
+                    res.json({
+                        image: result.rows[0],
+                        comments: data.rows
+                    });
+                })
+                .catch(err => {
+                    console.log("Error on the get comments rout ", err);
+                });
         })
         .catch(err => {
-            console.log("get image by ID ", err);
+            console.log("Error on the get comments rout ", err);
         });
 });
-
-// Get a scond rout to get the comments.
 
 app.listen(8080, () => console.log("image board on port 8080"));

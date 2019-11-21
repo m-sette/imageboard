@@ -39,3 +39,15 @@ module.exports.addComment = function(username, comment, id) {
         [username, comment, id]
     );
 };
+
+module.exports.getComments = function(imageId) {
+    return db.query(
+        `SELECT * FROM comments
+        WHERE image_id=$1
+        ORDER BY created_at DESC
+        `,
+        [imageId]
+    );
+};
+
+// SELECT * FROM comments WHERE image_id = 13

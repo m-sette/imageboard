@@ -16,13 +16,14 @@ Vue.component("image-modal", {
     mounted: function() {
         var me = this;
 
-        axios.get("/current-image/" + this.id).then(function(res) {
-            //me.this = res.data[0];
-            me.url = res.data[0].url;
-            me.title = res.data[0].title;
-            me.description = res.data[0].description;
-            me.username = res.data[0].username;
-            me.created = res.data[0].created_at;
+        axios.get("/current-image/" + this.id).then(function({ data }) {
+            me.this = data;
+            me.url = data.image.url;
+            me.title = data.image.title;
+            me.description = data.image.description;
+            me.username = data.image.username;
+            me.created = data.image.created_at;
+            me.comments = data.comments;
         });
     },
     methods: {
@@ -37,13 +38,14 @@ Vue.component("image-modal", {
                 id: this.id
             };
 
-            console.log(myObj);
+            // console.log(myObj);
             axios
-                .post("/upload-comment", myObj)
+                .post("/comment", myObj)
                 .then(function(res) {
-                    console.log("res.data.image...", res.data.image);
-                    me.commentname = res.data.image.username;
-                    me.comment = res.data.image.comment_text;
+                    //console.log("res.data.image...", res.data.image);
+                    me.comments.unshift(res.data.image);
+                    //me.commentname = res.data.image.username;
+                    //me.comment = res.data.image.comment_text;
                 })
                 .catch(function(err) {
                     console.log("Error in the post upload", err);

@@ -64,8 +64,8 @@
 
             <div class="comments-section">
                 <div class="comment-box" v-for="comment in comments">
-                    <h3>{{comment}}</h3>
-                    <p>By {{commentname}}</p>
+                    <h3>{{comment.comment_text}}</h3>
+                    <p>By {{comment.username}} on {{comment.created_at}}</p>
                 </div>
 
             </div>
