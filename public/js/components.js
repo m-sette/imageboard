@@ -43,7 +43,7 @@ Vue.component("image-modal", {
                 .post("/comment", myObj)
                 .then(function(res) {
                     //console.log("res.data.image...", res.data.image);
-                    me.comments.unshift(res.data.image);
+                    me.comments.unshift(res.data.comments);
                     //me.commentname = res.data.image.username;
                     //me.comment = res.data.image.comment_text;
                 })
@@ -52,4 +52,10 @@ Vue.component("image-modal", {
                 });
         }
     }
+    // watch: {
+    //     id: function() {
+    //         axios.get("/image/" + this.id);
+    //          do here the exact same thing from above
+    //     }
+    // }
 });

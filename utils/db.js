@@ -13,6 +13,24 @@ module.exports.getImages = function(limit) {
     );
 };
 
+module.exports.getFirstId = function() {
+    return db.query(
+        `SELECT id FROM images
+        ORDER BY id ASC
+        LIMIT 1;`
+    );
+};
+
+module.exports.getMoreImages = function(lastId) {
+    return db.query(
+        `SELECT * FROM images
+        WHERE id < $1
+        ORDER BY id DESC
+        LIMIT 10`,
+        [lastId]
+    );
+};
+
 module.exports.addImage = function(url, username, title, description) {
     return db.query(
         `INSERT INTO images (url, username, title, description)

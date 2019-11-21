@@ -39,11 +39,16 @@
             </form>
         </nav>
         <div class="container">
+            <!-- change this div to a link -->
+            <!-- <a :href="# + image.id"></a> -->
             <div class="card" v-for="image in images" v-bind:key="image.url" @click="setCurrentImage(image.id)">
                 <img :src="image.url" :alt="images.title">
                 <p>{{image.title}}</p>
             </div>
         </div>
+
+        <button class="btn" @click.prevent.default="handleClickResults">More result</button>
+
     </div>
 
 <p></p>
@@ -67,10 +72,7 @@
                     <h3>{{comment.comment_text}}</h3>
                     <p>By {{comment.username}} on {{comment.created_at}}</p>
                 </div>
-
             </div>
-
-
         </div>
     </script>
 

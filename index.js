@@ -48,7 +48,7 @@ app.post("/comment", (req, res) => {
     db.addComment(username, comment, id)
         .then(({ rows }) => {
             res.json({
-                image: rows[0]
+                comments: rows[0]
             });
             //console.log(rows);
         })
@@ -67,9 +67,19 @@ app.get("/images", (req, res) => {
         });
 });
 
+app.get("/images/:id", (req, res) => {
+    db.getMoreImages(req.params.id)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch(err => {
+            console.log("Error on the more-images route", err);
+        });
+});
+
 app.get("/current-image/:id", (req, res) => {
     const { id } = req.params;
-    console.log(id);
+    //console.log(id);
     db.getImageId(id)
         .then(result => {
             db.getComments(id)

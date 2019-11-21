@@ -6,13 +6,28 @@ new Vue({
         description: "",
         username: "",
         file: null,
-        currentImage: null
+        lastid: "",
+        currentImage: null //location.hash.slice(1)
     },
     mounted: function() {
         var me = this;
-        axios.get("/images").then(function(res) {
-            me.images = res.data;
-        });
+        axios
+            .get("/images")
+            .then(function(res) {
+                me.images = res.data;
+                //console.log(me.images);
+                //me.lastId = me.images.slice(-1)[0].id;
+                //console.log(me.lastId);
+            })
+            .catch(err => {
+                console.log("Error on the GET images Route: ", err);
+            });
+
+        //addEventListener("hashchange", function() {
+        //something
+        //do some check
+        //get response, if no image, hide the modal
+        //});
     },
     methods: {
         handleClick: function() {
@@ -40,12 +55,46 @@ new Vue({
         },
         unsetCurrentImage: function() {
             this.currentImage = null;
+            //add hash functionality
+        },
+        handleClickResults: function() {
+            var me = this;
+            me.lastid = me.images.slice(-1)[0].id;
+            console.log("client more images request ", me.lastid);
+            axios
+                .get("/images/" + me.lastid)
+                .then(function(res) {
+                    console.log("This is the more data ", res.data);
+                    //me.images.push(data);
+                    me.images = me.images.concat(res.data);
+                })
+                .catch(function(err) {
+                    console.log("Error on more buttom", err);
+                });
         }
     }
 });
-
-//axios.post("/comment", {
-// id: this.id,
-// username: this.username,
-// commet: this.commet
-// })
+// function checkScrollPos() {
+//     setTimeout(function() {
+//         if (
+//             $(document).scrollTop() + $(window).height() ===
+//             $(document).height()
+//         ) {
+//             $.ajax({
+//                 url: nextUrl,
+//                 method: "GET",
+//                 data: {
+//                     query: userInput,
+//                     type: artistOrAlbum
+//                 },
+//                 success: function(response) {
+//                     response = response.artists || response.albums;
+//                     request(response);
+//                     checkScrollPos();
+//                 }
+//             });
+//         } else {
+//             checkScrollPos();
+//         }
+//     }, 500);
+// }

@@ -10,11 +10,16 @@ header {
 }
 
 .pop-up {
-    background: rgba(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
     height: 100vh;
     width: 100%;
     color: white;
+}
+
+.comments-section {
+    background: grey;
+    border: 1px solid black;
 }
 
 nav {
