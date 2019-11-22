@@ -39,16 +39,17 @@
             </form>
         </nav>
         <div class="container">
-            <!-- change this div to a link -->
-            <!-- <a :href="# + image.id"></a> -->
             <div class="card" v-for="image in images" v-bind:key="image.url" @click="setCurrentImage(image.id)">
-                <img :src="image.url" :alt="images.title">
-                <p>{{image.title}}</p>
+                <a :href="'#'+image.id">
+                    <img :src="image.url" :alt="images.title">
+                </a>
+                <a :href="'#'+image.id">
+                    <p>{{image.title}}</p>
+                </a>
             </div>
         </div>
 
-        <button class="btn" @click.prevent.default="handleClickResults">More result</button>
-
+        <button class="btn" v-if="showButton" @click.prevent.default="handleClickResults">More result</button>
     </div>
 
 <p></p>

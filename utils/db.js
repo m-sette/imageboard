@@ -17,7 +17,7 @@ module.exports.getFirstId = function() {
     return db.query(
         `SELECT id FROM images
         ORDER BY id ASC
-        LIMIT 1;`
+        LIMIT 1`
     );
 };
 
@@ -26,7 +26,7 @@ module.exports.getMoreImages = function(lastId) {
         `SELECT * FROM images
         WHERE id < $1
         ORDER BY id DESC
-        LIMIT 10`,
+        LIMIT 6`,
         [lastId]
     );
 };

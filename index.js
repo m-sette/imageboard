@@ -68,9 +68,12 @@ app.get("/images", (req, res) => {
 });
 
 app.get("/images/:id", (req, res) => {
-    db.getMoreImages(req.params.id)
-        .then(({ rows }) => {
-            res.json(rows);
+    Promise.all([db.getFirstId(), db.getMoreImages(req.params.id)])
+        .then(result => {
+            res.json({
+                firstId: result[0].rows,
+                moreImages: result[1].rows
+            });
         })
         .catch(err => {
             console.log("Error on the more-images route", err);
