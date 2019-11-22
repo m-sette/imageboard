@@ -83,22 +83,35 @@ app.get("/images/:id", (req, res) => {
 app.get("/current-image/:id", (req, res) => {
     const { id } = req.params;
     //console.log(id);
-    db.getImageId(id)
+    Promise.all([db.getImageId(id), db.getComments(id)])
         .then(result => {
-            db.getComments(id)
-                .then(data => {
-                    res.json({
-                        image: result.rows[0],
-                        comments: data.rows
-                    });
-                })
-                .catch(err => {
-                    console.log("Error on the get comments rout ", err);
-                });
+            res.json({
+                image: result[0].rows[0],
+                comments: result[1].rows
+            });
         })
         .catch(err => {
-            console.log("Error on the get comments rout ", err);
+            console.log("error on the GET /current-image/:id route", err);
         });
+
+    // db.getImageId(id)
+    //     .then(result => {
+    //         db.getComments(id)
+    //             .then(data => {
+    //                 res.json({
+    //                     image: result.rows[0],
+    //                     comments: data.rows
+    //                 });
+    //             })
+    //             .catch(err => {
+    //                 console.log("Error on the get comments rout ", err);
+    //                 //res.json([]);
+    //             });
+    //     })
+    //     .catch(err => {
+    //         console.log("Error on the get comments rout ", err);
+    //         res.json([]);
+    //     });
 });
 
 app.listen(8080, () => console.log("image board on port 8080"));

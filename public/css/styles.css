@@ -18,6 +18,7 @@ header {
 .image-container {
     display: flex;
     justify-content: center;
+    /* align-items: center; */
     background: rgba(0, 0, 0, 0.5);
     min-height: 100%;
     min-width: 1024px;
@@ -28,15 +29,27 @@ header {
     left: 0;
 }
 .pop-up {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    /* align-items: center; */
     background: #222831;
     z-index: 100;
     height: 100vh;
     width: 80%;
     color: white;
     overflow: scroll;
+    padding: 20px;
+}
+
+.pop-up img {
+    align-self: center;
+    height: 450px;
+    width: 500px;
 }
 
 #close {
+    align-self: flex-end;
     cursor: pointer;
     font-size: 1.5em;
     /* position: absolute;
