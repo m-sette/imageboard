@@ -55,8 +55,11 @@
 <p></p>
     <!-- components goes here. outide of the vue instatnces -->
     <script type="text/x-template" id="image-template">
+        <div class="image-container">
+
+
         <div class="pop-up">
-            <p @click="unsetCurrentImage">X</p>
+            <p id="close" @click="unsetCurrentImage">X</p>
             <img :src="url" alt="">
             <h2>{{title}}</h2>
             <h4>{{description}}</h4>
@@ -75,6 +78,8 @@
                 </div>
             </div>
         </div>
+
+    </div>
     </script>
 
 
