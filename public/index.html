@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/image/favicon.ico">
-    <title>Image Board</title>
+    <title>Travel Imageboard</title>
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/vue.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
@@ -12,12 +12,12 @@
 <body>
     <header>
         <h1>Around the world with a frog</h1>
-        <img id="frog" src="/image/frogy.jpg" alt="frogy">
+        <img id="frog" src="/image/frogy1.jpg" alt="frogy">
     </header>
 
     <div id="main">
         <nav>
-            <h2>Fill the form and add more images</h2>
+            <h3>Fill the form and add more images</h3>
 
             <image-modal
             v-if="currentImage"
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <button class="btn" v-if="showButton" @click.prevent.default="handleClickResults">More result</button>
+        <button class="btn" id="more-btn" v-if="showButton" @click.prevent.default="handleClickResults">More result</button>
     </div>
 
 <p></p>

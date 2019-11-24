@@ -1,7 +1,3 @@
-// function unsetCurrentImage() {
-//     this.$emit("close");
-// }
-
 Vue.component("image-modal", {
     template: "#image-template",
     data: function() {
