@@ -50,8 +50,9 @@
                 </a>
             </div>
         </div>
-
-        <button class="btn" id="more-btn" v-if="showButton" @click.prevent.default="handleClickResults">More result</button>
+        <div id="more-btn">
+            <button class="btn" v-if="showButton" @click.prevent.default="handleClickResults">More result</button>
+        </div>
     </div>
 
 <p></p>
